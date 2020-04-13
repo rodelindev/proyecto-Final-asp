@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="proyectoFinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+          <Property Name="Categoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detalle_factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" Nullable="false" />
+          <Property Name="Idproducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Itbis" Type="numeric" Precision="13" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="existencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="IdProducto2" Type="int" Nullable="false" />
+          <Property Name="Documento" Type="varchar" MaxLength="50" />
+          <Property Name="ctd_entrada" Type="int" Nullable="false" />
+          <Property Name="ctd_salida" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="numeric" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="Existencia1" Type="int" Nullable="false" />
+          <Property Name="Fecha_vent" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Descuento" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pagado" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cambio" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="C_total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="T_Itbis" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="numeric" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <Association Name="fk_idCli">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idFact">
+          <End Role="factura" Type="Self.factura" Multiplicity="1" />
+          <End Role="detalle_factura" Type="Self.detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="factura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="detalle_factura">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProd">
+          <End Role="producto" Type="Self.producto" Multiplicity="1" />
+          <End Role="detalle_factura" Type="Self.detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="detalle_factura">
+              <PropertyRef Name="Idproducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProd2">
+          <End Role="producto" Type="Self.producto" Multiplicity="1" />
+          <End Role="existencia" Type="Self.existencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="existencia">
+              <PropertyRef Name="IdProducto2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProv">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+          <End Role="existencia" Type="Self.existencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="existencia">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="proyectoFinalModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_factura" EntityType="Self.detalle_factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="existencia" EntityType="Self.existencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="factura" EntityType="Self.factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_idCli" Association="Self.fk_idCli">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idFact" Association="Self.fk_idFact">
+            <End Role="factura" EntitySet="factura" />
+            <End Role="detalle_factura" EntitySet="detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProd" Association="Self.fk_idProd">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="detalle_factura" EntitySet="detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProd2" Association="Self.fk_idProd2">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="existencia" EntitySet="existencia" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProv" Association="Self.fk_idProv">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="existencia" EntitySet="existencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="proyectoFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Categoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="factura" Relationship="Self.fk_idCli" FromRole="cliente" ToRole="factura" />
+        </EntityType>
+        <EntityType Name="detalle_factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" Nullable="false" />
+          <Property Name="Idproducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Itbis" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <NavigationProperty Name="factura" Relationship="Self.fk_idFact" FromRole="detalle_factura" ToRole="factura" />
+          <NavigationProperty Name="producto" Relationship="Self.fk_idProd" FromRole="detalle_factura" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="existencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto2" Type="Int32" Nullable="false" />
+          <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ctd_entrada" Type="Int32" Nullable="false" />
+          <Property Name="ctd_salida" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Existencia1" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_vent" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="producto" Relationship="Self.fk_idProd2" FromRole="existencia" ToRole="producto" />
+          <NavigationProperty Name="proveedor" Relationship="Self.fk_idProv" FromRole="existencia" ToRole="proveedor" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Descuento" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pagado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cambio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="C_total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="T_Itbis" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.fk_idCli" FromRole="factura" ToRole="cliente" />
+          <NavigationProperty Name="detalle_factura" Relationship="Self.fk_idFact" FromRole="factura" ToRole="detalle_factura" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="detalle_factura" Relationship="Self.fk_idProd" FromRole="producto" ToRole="detalle_factura" />
+          <NavigationProperty Name="existencia" Relationship="Self.fk_idProd2" FromRole="producto" ToRole="existencia" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="existencia" Relationship="Self.fk_idProv" FromRole="proveedor" ToRole="existencia" />
+        </EntityType>
+        <Association Name="fk_idCli">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idFact">
+          <End Role="factura" Type="Self.factura" Multiplicity="1" />
+          <End Role="detalle_factura" Type="Self.detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="factura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="detalle_factura">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProd">
+          <End Role="producto" Type="Self.producto" Multiplicity="1" />
+          <End Role="detalle_factura" Type="Self.detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="detalle_factura">
+              <PropertyRef Name="Idproducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProd2">
+          <End Role="producto" Type="Self.producto" Multiplicity="1" />
+          <End Role="existencia" Type="Self.existencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="existencia">
+              <PropertyRef Name="IdProducto2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idProv">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+          <End Role="existencia" Type="Self.existencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="existencia">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="proyectoFinalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="detalle_factura" EntityType="Self.detalle_factura" />
+          <EntitySet Name="existencia" EntityType="Self.existencia" />
+          <EntitySet Name="factura" EntityType="Self.factura" />
+          <EntitySet Name="producto" EntityType="Self.producto" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+          <AssociationSet Name="fk_idCli" Association="Self.fk_idCli">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idFact" Association="Self.fk_idFact">
+            <End Role="factura" EntitySet="factura" />
+            <End Role="detalle_factura" EntitySet="detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProd" Association="Self.fk_idProd">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="detalle_factura" EntitySet="detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProd2" Association="Self.fk_idProd2">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="existencia" EntitySet="existencia" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idProv" Association="Self.fk_idProv">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="existencia" EntitySet="existencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="proyectoFinalModelStoreContainer" CdmEntityContainer="proyectoFinalEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="proyectoFinalModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_factura">
+            <EntityTypeMapping TypeName="proyectoFinalModel.detalle_factura">
+              <MappingFragment StoreEntitySet="detalle_factura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="Idproducto" ColumnName="Idproducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Itbis" ColumnName="Itbis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="existencia">
+            <EntityTypeMapping TypeName="proyectoFinalModel.existencia">
+              <MappingFragment StoreEntitySet="existencia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdProducto2" ColumnName="IdProducto2" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="ctd_entrada" ColumnName="ctd_entrada" />
+                <ScalarProperty Name="ctd_salida" ColumnName="ctd_salida" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Existencia1" ColumnName="Existencia1" />
+                <ScalarProperty Name="Fecha_vent" ColumnName="Fecha_vent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura">
+            <EntityTypeMapping TypeName="proyectoFinalModel.factura">
+              <MappingFragment StoreEntitySet="factura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Cambio" ColumnName="Cambio" />
+                <ScalarProperty Name="C_total" ColumnName="C_total" />
+                <ScalarProperty Name="T_Itbis" ColumnName="T_Itbis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto">
+            <EntityTypeMapping TypeName="proyectoFinalModel.producto">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="proyectoFinalModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

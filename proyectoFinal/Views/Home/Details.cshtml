@@ -1,0 +1,66 @@
+﻿@model proyectoFinal.Models.detalle_factura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>detalle_factura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Itbis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Itbis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.factura.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.factura.Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dedba8212faf4290aa3df42399988a1e" Name="Diagram1">
+        <EntityTypeShape EntityType="proyectoFinalModel.cliente" Width="1.5" PointX="1.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoFinalModel.detalle_factura" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoFinalModel.existencia" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoFinalModel.factura" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoFinalModel.producto" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoFinalModel.proveedor" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="proyectoFinalModel.fk_idCli" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoFinalModel.fk_idFact" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoFinalModel.fk_idProd" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoFinalModel.fk_idProd2" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoFinalModel.fk_idProv" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

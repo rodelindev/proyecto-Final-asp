@@ -1,0 +1,74 @@
+﻿@model IEnumerable<proyectoFinal.Models.cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <form action="/clientes/index" method="post">
+            <div class="col-md-3">
+                <input class="form-control" type="text" name="cliente" placeholder="Nombre del producto" />
+            </div>
+            <div class="col-md-4">
+                <input class="btn btn-default" type="submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+

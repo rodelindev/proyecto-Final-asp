@@ -1,0 +1,90 @@
+﻿@model proyectoFinal.Models.existencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>existencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Documento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ctd_entrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ctd_entrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ctd_salida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ctd_salida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Existencia1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Existencia1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_vent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_vent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proveedor.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedor.Cedula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

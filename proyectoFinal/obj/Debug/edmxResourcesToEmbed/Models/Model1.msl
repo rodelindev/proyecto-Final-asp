@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="proyectoFinalModelStoreContainer" CdmEntityContainer="proyectoFinalEntities">
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="proyectoFinalModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="detalle_factura">
+      <EntityTypeMapping TypeName="proyectoFinalModel.detalle_factura">
+        <MappingFragment StoreEntitySet="detalle_factura">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="Idproducto" ColumnName="Idproducto" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Itbis" ColumnName="Itbis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="existencia">
+      <EntityTypeMapping TypeName="proyectoFinalModel.existencia">
+        <MappingFragment StoreEntitySet="existencia">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+          <ScalarProperty Name="IdProducto2" ColumnName="IdProducto2" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="ctd_entrada" ColumnName="ctd_entrada" />
+          <ScalarProperty Name="ctd_salida" ColumnName="ctd_salida" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Existencia1" ColumnName="Existencia1" />
+          <ScalarProperty Name="Fecha_vent" ColumnName="Fecha_vent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="factura">
+      <EntityTypeMapping TypeName="proyectoFinalModel.factura">
+        <MappingFragment StoreEntitySet="factura">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+          <ScalarProperty Name="Cambio" ColumnName="Cambio" />
+          <ScalarProperty Name="C_total" ColumnName="C_total" />
+          <ScalarProperty Name="T_Itbis" ColumnName="T_Itbis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto">
+      <EntityTypeMapping TypeName="proyectoFinalModel.producto">
+        <MappingFragment StoreEntitySet="producto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proveedor">
+      <EntityTypeMapping TypeName="proyectoFinalModel.proveedor">
+        <MappingFragment StoreEntitySet="proveedor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
